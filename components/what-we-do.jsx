@@ -11,7 +11,7 @@ const WhatWeDo = () => {
                 </p>
             </div>
             <div>
-                <Image src={what} className="max-w-[400px] rounded-2xl" alt='what we do'/>
+                <Image src={what} className="md:max-w-[400px] rounded-2xl" alt='what we do'/>
             </div>
         </section>
     )

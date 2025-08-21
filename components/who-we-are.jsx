@@ -5,7 +5,7 @@ const WhoWeAre = () => {
     return(
         <section className='min-h-screen w-full max-w-[1440px] mx-auto px-4 py-8 flex items-center justify-around flex-col-reverse md:flex-row gap-10'>
             <div>
-                <Image src={WhoWeAreImage} alt="who we are" className="max-w-[400px] rounded-2xl"/>
+                <Image src={WhoWeAreImage} alt="who we are" className="md:max-w-[400px] rounded-2xl"/>
             </div>
             <div className="max-w-[500px]">
                 <h2 className="text-3xl md:text-5xl font-bold">Who We Are</h2>

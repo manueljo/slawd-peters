@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen w-full  relative text-gray-800">
+        <div className="min-h-screen w-full  relative text-gray-800 overflow-hidden">
           {/* Concentric Squares - Light Pattern */}
           <div
             className="absolute inset-0 z-[-1] pointer-events-none"
