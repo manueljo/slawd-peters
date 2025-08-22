@@ -1,8 +1,28 @@
-import { Button } from "@/components/ui/button";
 import { Mail, MapPinHouse, PhoneOutgoing } from "lucide-react";
 import Link from "next/link";
+import ContactForm from "@/components/contact-form";
+import { Resend } from "resend";
+import Map from "@/components/map";
+
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
 const Contact = () => {
+  async function sendEmail(formData) {
+    "use server";
+
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const subject = formData.get("subject");
+    const message = formData.get("message");
+    
+    await resend.emails.send({
+      from: "slawd@resend.dev",
+      to: "mikebillyy@gmail.com",
+      subject: `${subject}`,
+      html: `<p>Name: ${name}</p><p>Email: ${email}</p> <p>Message: ${message}</p>`,
+    });
+  }
+
   return (
     <>
       <section>
@@ -25,7 +45,7 @@ const Contact = () => {
         </div>
       </section>
       <section className="max-w-[1024px] mx-auto px-4 py-8">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2003.7378142382372!2d7.851907258085891!3d4.8527078309803615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1067fd39642d14a3%3A0x7a08a78660c32885!2sSLAWD%20PETERS%20Engineering%20Limited!5e1!3m2!1sen!2sng!4v1755785116306!5m2!1sen!2sng" width="100%" height="450" style={{border:0}} allowFullScreen='' loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        <Map/>
       </section>
       <section className="max-w-[1024px] mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="">
@@ -60,40 +80,7 @@ const Contact = () => {
             forward to hearing from you!
           </p>
         </div>
-        <div>
-          <form className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-2 border-1 border-black  rounded"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full p-2 border-1 border-black rounded"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <textarea
-                placeholder="Your Message"
-                className="w-full h-full p-2 border-1 border-black  rounded"
-                rows="10"
-                required
-              ></textarea>
-            </div>
-            <Button
-              className=" bg-blue-950 text-white hover:bg-blue-700 transition-colors w-full"
-              type="submit"
-            >
-              Send Message
-            </Button>
-          </form>
-        </div>
+        <ContactForm sendEmail={sendEmail} />
       </section>
     </>
   );

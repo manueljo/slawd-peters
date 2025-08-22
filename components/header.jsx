@@ -42,7 +42,7 @@ const Header = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
-    <header className="fixed w-full z-100">
+    <header className="w-full z-100">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
